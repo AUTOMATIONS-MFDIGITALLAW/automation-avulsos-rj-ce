@@ -1,0 +1,10 @@
+numpy
+opencv-python
+openpyxl
+pandas
+pillow
+PyAutoGUI
+loguru
+keyboard
+flet
+tkinter
