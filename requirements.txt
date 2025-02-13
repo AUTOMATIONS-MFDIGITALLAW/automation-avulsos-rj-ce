@@ -7,4 +7,5 @@ PyAutoGUI
 loguru
 keyboard
 flet
-tkinter
+flet-desktop
+tk
