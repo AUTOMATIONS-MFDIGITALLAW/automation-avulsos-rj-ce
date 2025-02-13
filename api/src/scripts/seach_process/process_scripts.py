@@ -6,7 +6,7 @@ from api.src.scripts.seach_process.audiencia.index import AudienciaProcess
 from api.src.scripts.seach_process.citacao.index import CitacaoProcess
 from api.src.scripts.seach_process.sentenca.index import SentencaProcess
 from api.src.scripts.seach_process.tutela.index import TutelaProcess
-from api.src.utils.functions.format_date import format_date
+from api.src.utils.functions.format_date import format_date, format_hora
 from api.src.utils.functions.capture_img import ScreenImage
 from api.src.utils.functions.click_position import click_and_fill, click_and_fill_novo
 from api.src.utils.logs.index import log
@@ -61,6 +61,7 @@ class SeachProcess(AllSeach):
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
             ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
             date_tratativa = format_date(self.row['DATA RECEBIMENTO BCC AVULSO'])
+            hora_tratativa = format_hora(self.row['HORA RECEBIMENTO BCC AVULSO'])
             log.info(f'DATA CAPTURADA:{date_tratativa}')
             pyp.copy(date_tratativa)
             sleep(3)
@@ -68,6 +69,11 @@ class SeachProcess(AllSeach):
             pya.hotkey('ctrl', 'a')
             sleep(2)
             pya.hotkey('ctrl', 'v')
+            sleep(2)
+            pya.press('tab')
+            pyp.copy(hora_tratativa)
+            pya.hotkey('ctrl', 'v')
+            sleep(2)
             ScreenImage.wait_and_click('etiqueta', "Etiqueta Verde",)
             ScreenImage.wait_and_click('filtrar', "Filtrar",)
             sleep(2)
