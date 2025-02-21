@@ -30,8 +30,8 @@ class SentencaProcess(AllSeach):
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
             ScreenImage.wait_and_click('decisao', "Botao Decisão",)
             
-            date_citacao = format_date(self.row['DATA CITAÇÃO'])
-            log.info(f'DATA CITAÇÃO:{date_citacao}')
+            date_citacao = format_date(self.row['DATA DE CITAÇÃO/INTIMAÇÃO'])
+            log.info(f'DATA DE CITAÇÃO/INTIMAÇÃO:{date_citacao}')
             pyp.copy(date_citacao)
             sleep(3)
             click_and_fill_novo('data_tutela')

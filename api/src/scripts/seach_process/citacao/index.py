@@ -26,9 +26,9 @@ class CitacaoProcess(AllSeach):
         log.info('🔍 Iniciando Citaçao de Processo')     
         
         try:  
-            date_citacao = format_date(self.row['DATA CITAÇÃO'])
-            hora_citacao = self.row['HORA CITAÇÃO']
-            log.info(f'DATA CITAÇÃO:{date_citacao}, HORA :{hora_citacao}')
+            date_citacao = format_date(self.row['DATA DE CITAÇÃO/INTIMAÇÃO'])
+            hora_citacao = self.row['HORA DE CITAÇÃO/INTIMAÇÃO']
+            log.info(f'DATA DE CITAÇÃO/INTIMAÇÃO:{date_citacao}, HORA :{hora_citacao}')
             pyp.copy(date_citacao)
             sleep(3)
             click_and_fill_novo('data_nota')

@@ -90,7 +90,7 @@ class SeachProcess(AllSeach):
                 deligencia = self.row['DILIGÊNCIA']
                 audiencia = self.row['AUDIÊNCIA?']
                 log.info(f'{deligencia} {audiencia}')
-                if deligencia in ['CITAÇÃO/INTIMAÇÃO', 'CITAÇÃO']:
+                if deligencia in ['CITACAO', 'CITAÇÃO']:
                     if not nota_citacao:
                         log.info('Nota de Citação não existente')
                         ScreenImage.wait_and_click('altra_nota', "Altrar Nota",)
@@ -115,10 +115,7 @@ class SeachProcess(AllSeach):
                 if deligencia in ['LIMINAR DEFERIDA', 'TUTELA']:
                     log.info('Chamando a funçao de inserir tutela')
                     TutelaProcess.insert_tutela(self)
-                
-                if deligencia == "SENTENÇA":
-                     log.info('Chamando a funçao de inserir sentença')
-                     SentencaProcess.insert_sentenca(self)
+            
                      
                 
                 if audiencia == 'SIM':
