@@ -85,7 +85,8 @@ def main(page: ft.Page):
 
     page.update()
 
-ft.app(main)
+if __name__ == "__main__":
+    ft.app(target=main, view=ft.WEB_BROWSER)
 
 
 # # Executar a função

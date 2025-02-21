@@ -8,4 +8,5 @@ loguru
 keyboard
 flet
 flet-desktop
+flet-web
 tk
