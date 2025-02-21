@@ -36,7 +36,7 @@ class CitacaoProcess(AllSeach):
             sleep(2)
             pya.hotkey('ctrl', 'v')
             sleep(2)
-            pya.press('tab')
+            key.press('tab')
             sleep(2)
             pyp.copy(hora_citacao)
             sleep(2)
