@@ -36,6 +36,7 @@ IMAGE_PATH = {
     'filtrar': 'api/src/utils/screens/img/filtrar.png',
     'checkbox': 'api/src/utils/screens/img/checkbox.png',
     'ok_azul': 'api/src/utils/screens/img/ok_azul.png',
+    'anular_azul': 'api/src/utils/screens/img/anular_azul.png',
     'descricao_tutela': 'api/src/utils/screens/img/descricao_tutela.png',
     'descricao_sentenca': 'api/src/utils/screens/img/descricao_sentenca.png',
     
