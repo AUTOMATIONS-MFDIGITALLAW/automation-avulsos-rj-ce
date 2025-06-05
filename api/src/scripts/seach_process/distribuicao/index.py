@@ -17,40 +17,33 @@ class AllSeach(BaseTask):
         return super().execute()
     
     
-class CitacaoProcess(AllSeach):
+class DistribuicaoProcess(AllSeach):
     def __init__(self, row):
         super().__init__(row)
 
 
-    def insert_citacao(self):
-        log.info('🔍 Iniciando Citaçao de Processo')     
+    def insert_distribuicao(self):
+        log.info('🔍 Iniciando Distribuicao de Processo')     
         
         try:  
             ScreenImage.wait_and_click('adv_agenda', "Tela de Agenda",)            
             pya.click(1016, 512, button='right')
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
             ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
-            date_citacao = format_date(self.row['DATA CITACAO'])
-            hora_citacao = self.row['HORA CITACAO']
-            log.info(f'📅 Data de CITAÇão:{date_citacao}, HORA :{hora_citacao}')
-            pyp.copy(date_citacao)
+            date_distribuicao = format_date(self.row['DATA DISTRIBUICAO'])
+            log.info(f'📅 Data de Distribuição: {date_distribuicao}')
+            pyp.copy(date_distribuicao)
             sleep(3)
             ScreenImage.wait_and_click('nova_nota', "nova nota",)
             click_and_fill_novo('data_nota')
             pya.hotkey('ctrl', 'a')
             sleep(2)
             pya.hotkey('ctrl', 'v')
-            sleep(2)
-            key.press('tab')
-            sleep(2)
-            pyp.copy(hora_citacao)
-            sleep(2)
-            pya.hotkey('ctrl', 'v')
-            sleep(2)
+            sleep(2)           
             ScreenImage.wait_and_click('etiqueta', "Etiqueta Verde",)
             ScreenImage.wait_and_click('filtrar', "Filtrar",)
             sleep(2)
-            key.write('DATA DE CITAÇÃO')
+            key.write('DATA DE DISTRIBUIÇÃO')
             sleep(2)
             ScreenImage.wait_and_click('checkbox', "Checkbox",)
             ScreenImage.wait_and_click('yes_agenda', "Yes",)
@@ -60,9 +53,9 @@ class CitacaoProcess(AllSeach):
                 sleep(2)
                 ScreenImage.wait_and_click('ok_azul', "Ok",)
                 
-            log.success('Agenda de Citação inserido com sucesso')
+            log.success('Agenda de distribuicao inserido com sucesso')
             
             
         except Exception as e:
-            log.error(f'❌ ERRO na citação: {e}')
+            log.error(f'❌ ERRO na distribuicao: {e}')
         

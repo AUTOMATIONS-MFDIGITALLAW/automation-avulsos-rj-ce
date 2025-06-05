@@ -10,7 +10,7 @@ class DataFrameUtils:
     def data_frame(file_path: str, colunas_esperadas=None):
     
         if colunas_esperadas is None:
-            colunas_esperadas = ["DATA RECEBIMENTO BCC AVULSO","HORA RECEBIMENTO BCC AVULSO", "PROCESSO", "AUDIÊNCIA?", "DATA AUDIÊNCIA", "HORA AUDIÊNCIA", "DATA DE CITAÇÃO/INTIMAÇÃO", "HORA DE CITAÇÃO/INTIMAÇÃO", "DILIGÊNCIA", "DESCRIÇÃO"]
+            colunas_esperadas = ["DATA RECEBIMENTO BCC AVULSO","HORA RECEBIMENTO BCC AVULSO", "PROCESSO"]
 
         if not os.path.exists(file_path):
             raise FileNotFoundError(f"O arquivo '{file_path}' não foi encontrado.")

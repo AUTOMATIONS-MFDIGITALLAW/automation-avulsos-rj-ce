@@ -30,9 +30,9 @@ class TutelaProcess(AllSeach):
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
             ScreenImage.wait_and_click('decisao', "Botao Decisão",)
             
-            date_citacao = format_date(self.row['DATA DE CITAÇÃO/INTIMAÇÃO'])
-            log.info(f'DATA DE CITAÇÃO/INTIMAÇÃO:{date_citacao}')
-            pyp.copy(date_citacao)
+            date_tutela = format_date(self.row['DATA TUTELA'])
+            log.info(f'DATA TUTELA:{date_tutela}')
+            pyp.copy(date_tutela)
             sleep(3)
             click_and_fill_novo('data_tutela')
             pya.hotkey('ctrl', 'a')
@@ -46,7 +46,7 @@ class TutelaProcess(AllSeach):
             ScreenImage.wait_and_click('checkbox', "Checkbox",)
             ScreenImage.wait_and_click('yes_agenda', "Yes",)
             ScreenImage.wait_and_click('ok_azul', "Ok",)
-            descricao = self.row['DESCRIÇÃO']
+            descricao = self.row['OBF TUTELA']
             pyp.copy(descricao)
             ScreenImage.wait_and_click('descricao_tutela', 'Descrição Tutela')
             key.write(' - ')

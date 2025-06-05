@@ -25,10 +25,13 @@ IMAGE_PATH = {
     'agenda': 'api/src/utils/screens/img/agenda.png',
     'adv_agenda': 'api/src/utils/screens/img/adv_agenda.png',
     'citacao': 'api/src/utils/screens/img/citacao.png',
+    'distribuicao': 'api/src/utils/screens/img/nota_distribuicao.png',
     'nova_nota': 'api/src/utils/screens/img/nova_nota.png',
     'novo': 'api/src/utils/screens/img/novo.png',
     'prazo': 'api/src/utils/screens/img/prazo.png',
     "decisao": 'api/src/utils/screens/img/decisao.png',
+    "excluir": 'api/src/utils/screens/img/excluir.png',
+    "yes_excluir": 'api/src/utils/screens/img/yes_excluir.png',
     "audiencia": 'api/src/utils/screens/img/audiencia.png',
     
     # inseri nota 

@@ -30,9 +30,9 @@ class AudienciaProcess(AllSeach):
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
             ScreenImage.wait_and_click('audiencia', "Botao Audiencia",)
             
-            date_audiencia = format_date(self.row['DATA AUDIÊNCIA'])
-            hora_audiencia = format_hora(self.row['HORA AUDIÊNCIA'])
-            log.info(f'DATA AUDIÊNCIA:{date_audiencia} HORA:{hora_audiencia}')
+            date_audiencia = format_date(self.row['DATA AUDIENCIA'])
+            hora_audiencia = format_hora(self.row['HORA AUDIENCIA'])
+            log.info(f'DATA AUDIENCIA:{date_audiencia} HORA AUDIENCIA:{hora_audiencia}')
             pyp.copy(date_audiencia)
             ScreenImage.wait_and_click('nova_nota', 'Nova Nota')
             click_and_fill_novo('data_nota')
