@@ -25,7 +25,7 @@ class AudienciaProcess(AllSeach):
     def insert_audiencia(self):
         log.info('🔍 Iniciando Agenda de Audiencia')
         
-        try:  
+        try:              
             pya.click(1016, 512, button='right')
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
             ScreenImage.wait_and_click('audiencia', "Botao Audiencia",)

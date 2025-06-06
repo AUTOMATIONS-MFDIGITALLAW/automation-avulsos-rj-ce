@@ -41,14 +41,10 @@ class SeachProcess(AllSeach):
             ScreenImage.wait_and_click('button_ok', "Butão OK",)
             ScreenImage.wait_and_click('one', "ONE",)
             ScreenImage.wait_and_Doubleclick('process', "Processo",)
-            log.success('✅ Busca de processo com sucesso')            
-            SeachProcess.insert_agenda_bcc(self)            
-            date_distribuicao = format_date(self.row['DATA DISTRIBUICAO'])
-            if date_distribuicao and not pd.isna(date_distribuicao) and str(date_distribuicao).strip().lower() != 'nat':
-                SeachProcess.insert_agenda_bcc(self)
-            else:
-                SeachProcess.insert_agenda(self)
-
+            log.success('✅ Busca de processo com sucesso')   
+                     
+            SeachProcess.insert_agenda_bcc(self) 
+                       
 
         except Exception as e:
             log.error(f'❌ ERRO ao buscar processo: {e}')
@@ -153,63 +149,7 @@ class SeachProcess(AllSeach):
             log.error(f'❌ ERRO ao detalhes de  processo: {e}')
             
     
-    def insert_agenda(self):
-        log.info('🔍 Iniciando Abertura de Agenda')
-        
-        try:
-
-            ScreenImage.wait_and_click('agenda', "Agenda",)
-            ScreenImage.wait_and_click('adv_agenda', "Tela de Agenda",)
-            
-            nota_citacao = ScreenImage.find_img('citacao', 'Citação', "")
-            
-            pya.click(1016, 512, button='right')
-            ScreenImage.wait_and_click('novo', "botao novo da agenda",)
-            ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
-            
-            try:
-                deligencia = self.row['DILIGÊNCIA']
-                audiencia = self.row['AUDIÊNCIA?']
-                log.info(f'{deligencia} {audiencia}')
-                if deligencia in ['CITACAO', 'CITAÇÃO', 'CITAÇÃO COM TUTELA']:
-                    if not nota_citacao:
-                        log.info('Nota de Citação não existente')
-                        # ScreenImage.wait_and_click('altra_nota', "Altrar Nota",)
-                        # ScreenImage.find_img('yes_agenda', 'Yes', 'click')
-                        # sleep(2)
-                        # ScreenImage.wait_and_click('ok_azul', "Ok",)
-                        CitacaoProcess.insert_citacao(self)
-                    else:
-                        ScreenImage.wait_and_click('ok_azul', "Ok",)
-                        if ScreenImage.find_img('yes_agenda', 'Yes', 'click'):
-                            sleep(2)
-                        if ScreenImage.wait_and_click('ok_azul', "Ok"):
-                            sleep(3)
-                else:
-                    ScreenImage.wait_and_click('anular_azul', "Anular",)
-                    ScreenImage.find_img('yes_agenda', 'Yes', 'click')
-                            
-                    
-                    
-                if deligencia in ['LIMINAR DEFERIDA', 'TUTELA', 'CITAÇÃO COM TUTELA']:
-                    log.info('Chamando a funçao de inserir tutela')
-                    TutelaProcess.insert_tutela(self)
-            
-                     
-                
-                if audiencia == 'SIM':
-                    log.info('Audiencia existente iniciando abertura')
-                    AudienciaProcess.insert_audiencia(self)
-                        
-            except Exception as e:
-                log.error(f'❌ ERRO na DILIGENCIA: {e}')
-                
-            
-            ScreenImage.wait_and_click('encerrar', "Encerrar",)
-           
- 
-        except Exception as e:
-            log.error(f'❌ ERRO ao detalhes de  processo: {e}')
+    
             
     
         

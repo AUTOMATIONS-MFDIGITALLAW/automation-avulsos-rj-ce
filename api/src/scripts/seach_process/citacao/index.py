@@ -25,7 +25,7 @@ class CitacaoProcess(AllSeach):
     def insert_citacao(self):
         log.info('🔍 Iniciando Citaçao de Processo')     
         
-        try:  
+        try:            
             ScreenImage.wait_and_click('adv_agenda', "Tela de Agenda",)            
             pya.click(1016, 512, button='right')
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
@@ -55,7 +55,7 @@ class CitacaoProcess(AllSeach):
             ScreenImage.wait_and_click('checkbox', "Checkbox",)
             ScreenImage.wait_and_click('yes_agenda', "Yes",)
             ScreenImage.wait_and_click('ok_azul', "Ok",)
-            ScreenImage.wait_and_click('ok_azul', "Ok",)
+            ScreenImage.wait_and_click('ok_azul', "Ok",)       
             if ScreenImage.find_img('yes_agenda', 'Yes', 'click'):
                 sleep(2)
                 ScreenImage.wait_and_click('ok_azul', "Ok",)
