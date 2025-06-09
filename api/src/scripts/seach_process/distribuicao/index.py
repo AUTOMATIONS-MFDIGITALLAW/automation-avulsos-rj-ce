@@ -51,7 +51,7 @@ class DistribuicaoProcess(AllSeach):
             ScreenImage.wait_and_click('ok_azul', "Ok",)
             if ScreenImage.find_img('yes_agenda', 'Yes', 'click'):
                 sleep(2)
-                ScreenImage.wait_and_click('ok_azul', "Ok",)
+                ScreenImage.find_img('ok_azul', "Ok", 'click')
                 
             log.success('Agenda de distribuicao inserido com sucesso')
             
