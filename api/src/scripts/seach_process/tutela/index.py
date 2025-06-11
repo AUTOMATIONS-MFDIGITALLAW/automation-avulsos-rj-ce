@@ -55,7 +55,7 @@ class TutelaProcess(AllSeach):
             ScreenImage.wait_and_click('ok_azul', "Ok",)
             if ScreenImage.find_img('yes_agenda', 'Yes', 'click'):
                 sleep(2)
-            if ScreenImage.wait_and_click('ok_azul', "Ok"):
+            if ScreenImage.find_img('ok_azul', "Ok", 'click'):
                 sleep(2)
                 
             log.success('Agenda de Tutela inserido com sucesso')

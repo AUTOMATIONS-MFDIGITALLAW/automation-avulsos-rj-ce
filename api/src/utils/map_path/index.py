@@ -24,6 +24,7 @@ IMAGE_PATH = {
     # detalhes processo 
     'agenda': 'api/src/utils/screens/img/agenda.png',
     'adv_agenda': 'api/src/utils/screens/img/adv_agenda.png',
+    'detalhe': 'api/src/utils/screens/img/detalhe_do_processo.png',
     'citacao': 'api/src/utils/screens/img/citacao.png',
     'distribuicao': 'api/src/utils/screens/img/nota_distribuicao.png',
     'nova_nota': 'api/src/utils/screens/img/nova_nota.png',
@@ -50,6 +51,7 @@ IMAGE_PATH = {
     
     # encerrar processo concluido
     'encerrar': 'api/src/utils/screens/img/encerrar.png',
+    'ultimo_processo': 'api/src/utils/screens/img/ultimo_processo.png',
     
     
     

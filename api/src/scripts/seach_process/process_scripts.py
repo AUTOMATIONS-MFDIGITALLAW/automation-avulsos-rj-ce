@@ -33,6 +33,13 @@ class SeachProcess(AllSeach):
         try:
             # Busca e clica na imagem "lupa_seach"
             ScreenImage.wait_and_click('lupa_seach', "botão de pesquisa")
+            
+            busc_encont = ScreenImage.wait_and_click('busc', "Tela de busca",)
+            
+            if not busc_encont:
+                ScreenImage.wait_and_click('lupa_seach', "botão de pesquisa",)
+            
+            # se nao busca a img busc por 8 segundo ele clica novamente no lupa 
             ScreenImage.wait_and_click('busc', "Tela de busca")
             click_and_fill_novo('seach', '_POR NUMERO DE PROCESSO')
             click_and_fill('seach')
@@ -54,9 +61,16 @@ class SeachProcess(AllSeach):
         log.info('🔍 Iniciando Abertura de Agenda')
         
         try:
-
+            
+            # fazer
             ScreenImage.wait_and_click('agenda', "Agenda",)
-            ScreenImage.wait_and_click('adv_agenda', "Tela de Agenda",)            
+            
+            
+            if not ScreenImage.find_img('adv_agenda', "Tela de Agenda", ""):
+                pya.click(792, 292)
+                ScreenImage.wait_and_click('agenda', "Agenda",)
+                ScreenImage.wait_and_click('adv_agenda', "Tela de Agenda",)
+            sleep(2)              
             pya.click(1016, 512, button='right')
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
             ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
@@ -135,14 +149,22 @@ class SeachProcess(AllSeach):
                 audiencia = format_date(self.row['DATA AUDIENCIA'])                
                 if audiencia and not pd.isna(audiencia) and str(audiencia).strip().lower() != 'nat':
                     log.info('Audiencia existente iniciando abertura')
-                    AudienciaProcess.insert_audiencia(self)        
+                    AudienciaProcess.insert_audiencia(self)  
+                    
+                             
                 
                         
             except Exception as e:
                 log.error(f'❌ ERRO na DILIGENCIA: {e}')
                 
-            
+            # fazer
             ScreenImage.wait_and_click('encerrar', "Encerrar",)
+            sleep(5)
+            
+            ultimo_proc = ScreenImage.wait_and_click('ultimo_processo')
+            if not ultimo_proc:
+                ScreenImage.wait_and_click('encerrar', "Encerrar",)
+            ScreenImage.wait_and_click('ultimo_processo',)
            
  
         except Exception as e:
