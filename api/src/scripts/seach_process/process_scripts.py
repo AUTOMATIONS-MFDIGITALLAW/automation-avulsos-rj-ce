@@ -72,13 +72,13 @@ class SeachProcess(AllSeach):
                 ScreenImage.wait_and_click('agenda', "Agenda",)
                 ScreenImage.wait_and_click('adv_agenda', "Tela de Agenda",)
             sleep(2)              
-            pya.click(1016, 512, button='right')
-            ScreenImage.wait_and_click('novo', "botao novo da agenda",)
-            ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
             
             try:
                 date_tratativa = format_date(self.row['DATA RECEBIMENTO BCC AVULSO'])
                 if date_tratativa and not pd.isna(date_tratativa) and str(date_tratativa).strip().lower() != 'nat':
+                    pya.click(1016, 512, button='right')
+                    ScreenImage.wait_and_click('novo', "botao novo da agenda",)
+                    ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
                     hora_tratativa = self.row['HORA RECEBIMENTO BCC AVULSO']
                     log.info(f'DATA CAPTURADA:{date_tratativa} hora: {hora_tratativa}')
                     pyp.copy(date_tratativa)
