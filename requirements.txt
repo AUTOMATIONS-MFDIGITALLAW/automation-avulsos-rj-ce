@@ -10,3 +10,4 @@ flet==0.26.0
 flet-desktop
 flet-web
 tk
+envelopes

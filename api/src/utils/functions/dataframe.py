@@ -3,6 +3,9 @@ import pandas as pd
 import os
 from api.src.scripts.seach_process.process_scripts import SeachProcess
 from api.src.utils.logs.index import log
+from api.src.utils.functions import sendmail
+from api.src.utils.functions.sendmail import sendmail
+
 
 class DataFrameUtils:
     
@@ -36,6 +39,7 @@ class DataFrameUtils:
                 return
             
             log.info("✅ Todas as colunas obrigatórias estão presentes!")
+            sendmail()
             
             # Garantindo que a coluna "Status" exista no DataFrame
             if "Status" not in df.columns:
