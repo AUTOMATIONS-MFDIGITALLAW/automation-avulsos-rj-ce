@@ -48,7 +48,8 @@ class SeachProcess(AllSeach):
             ScreenImage.wait_and_click('button_ok', "Butão OK",)
             ScreenImage.wait_and_click('one', "ONE",)
             ScreenImage.wait_and_Doubleclick('process', "Processo",)
-            log.success('✅ Busca de processo com sucesso')   
+            log.success('✅ Busca de processo com sucesso') 
+             
                      
             SeachProcess.insert_agenda_bcc(self) 
                        
@@ -71,39 +72,47 @@ class SeachProcess(AllSeach):
                 ScreenImage.wait_and_click('agenda', "Agenda",)
                 ScreenImage.wait_and_click('adv_agenda', "Tela de Agenda",)
             sleep(2)              
-            pya.click(1016, 512, button='right')
-            ScreenImage.wait_and_click('novo', "botao novo da agenda",)
-            ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
-            date_tratativa = format_date(self.row['DATA RECEBIMENTO BCC AVULSO'])
-            hora_tratativa = self.row['HORA RECEBIMENTO BCC AVULSO']
-            log.info(f'DATA CAPTURADA:{date_tratativa} hora: {hora_tratativa}')
-            pyp.copy(date_tratativa)
-            sleep(3)
-            click_and_fill_novo('data_nota')
-            pya.hotkey('ctrl', 'a')
-            sleep(2)
-            pya.hotkey('ctrl', 'v')
-            sleep(2)
-            key.press('Tab')
-            sleep(2)
-            pyp.copy(hora_tratativa)
-            sleep(2)
-            pya.hotkey('ctrl', 'v')
-            sleep(2)
-            ScreenImage.wait_and_click('etiqueta', "Etiqueta Verde",)
-            ScreenImage.wait_and_click('filtrar', "Filtrar",)
-            sleep(2)
-            key.write('DATA DE RECEBIMENTO NO BACKOFFICE - AVULSO')
-            sleep(2)
-            ScreenImage.wait_and_click('checkbox', "Checkbox",)
-            ScreenImage.wait_and_click('yes_agenda', "Yes",)
-            ScreenImage.wait_and_click('ok_azul', "Ok",)
-            sleep(2)
-            ScreenImage.wait_and_click('ok_azul', "Ok",)
-            if ScreenImage.find_img('yes_agenda', 'Yes', 'click'):
-                sleep(2)
-                ScreenImage.find_img('ok_azul', "Ok", 'click')
             
+            try:
+                date_tratativa = format_date(self.row['DATA RECEBIMENTO BCC AVULSO'])
+                if date_tratativa and not pd.isna(date_tratativa) and str(date_tratativa).strip().lower() != 'nat':
+                    pya.click(1016, 512, button='right')
+                    ScreenImage.wait_and_click('novo', "botao novo da agenda",)
+                    ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
+                    hora_tratativa = self.row['HORA RECEBIMENTO BCC AVULSO']
+                    log.info(f'DATA CAPTURADA:{date_tratativa} hora: {hora_tratativa}')
+                    pyp.copy(date_tratativa)
+                    sleep(3)
+                    click_and_fill_novo('data_nota')
+                    pya.hotkey('ctrl', 'a')
+                    sleep(2)
+                    pya.hotkey('ctrl', 'v')
+                    sleep(2)
+                    key.press('Tab')
+                    sleep(2)
+                    pyp.copy(hora_tratativa)
+                    sleep(2)
+                    pya.hotkey('ctrl', 'v')
+                    sleep(2)
+                    ScreenImage.wait_and_click('etiqueta', "Etiqueta Verde",)
+                    ScreenImage.wait_and_click('filtrar', "Filtrar",)
+                    sleep(2)
+                    key.write('DATA DE RECEBIMENTO NO BACKOFFICE - AVULSO')
+                    sleep(2)
+                    ScreenImage.wait_and_click('checkbox', "Checkbox",)
+                    ScreenImage.wait_and_click('yes_agenda', "Yes",)
+                    ScreenImage.wait_and_click('ok_azul', "Ok",)
+                    sleep(2)
+                    ScreenImage.wait_and_click('ok_azul', "Ok",)
+                    if ScreenImage.find_img('yes_agenda', 'Yes', 'click'):
+                        sleep(2)
+                        ScreenImage.find_img('ok_azul', "Ok", 'click')
+                        
+                else:
+                     log.info('Nota de BCC não existente base')
+                    
+            except Exception as e:
+                log.error(f'❌ ERRO na Agenda BCC: {e}')
             
             try:
                 
