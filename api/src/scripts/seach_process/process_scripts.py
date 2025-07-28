@@ -10,6 +10,7 @@ from api.src.scripts.seach_process.sentenca.index import SentencaProcess
 from api.src.scripts.seach_process.tutela.index import TutelaProcess
 from api.src.utils.functions.format_date import format_date, format_hora
 from api.src.utils.functions.capture_img import ScreenImage
+from api.src.utils.functions.heartbeat import update_heartbeat
 from api.src.utils.functions.click_position import click_and_fill, click_and_fill_novo
 from api.src.utils.logs.index import log
 from api.src.scripts.base.base_scripts import BaseTask
@@ -33,6 +34,7 @@ class SeachProcess(AllSeach):
         try:
             # Busca e clica na imagem "lupa_seach"
             ScreenImage.wait_and_click('lupa_seach', "botão de pesquisa")
+            update_heartbeat()
             
             busc_encont = ScreenImage.wait_and_click('busc', "Tela de busca",)
             
