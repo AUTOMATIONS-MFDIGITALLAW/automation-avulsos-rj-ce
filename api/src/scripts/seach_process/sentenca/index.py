@@ -4,6 +4,7 @@ import pyautogui as pya
 import keyboard as key
 from api.src.utils.functions.format_date import format_date
 from api.src.utils.functions.capture_img import ScreenImage
+from api.src.utils.functions.heartbeat import update_heartbeat
 from api.src.utils.functions.click_position import click_and_fill_novo
 from api.src.utils.logs.index import log
 from api.src.scripts.base.base_scripts import BaseTask
@@ -28,6 +29,7 @@ class SentencaProcess(AllSeach):
         try:  
             pya.click(1016, 512, button='right')
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
+            update_heartbeat()
             ScreenImage.wait_and_click('decisao', "Botao Decisão",)
             
             date_citacao = format_date(self.row['DATA DE CITAÇÃO/INTIMAÇÃO'])
