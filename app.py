@@ -3,6 +3,7 @@ from api.src.utils.logs.index import log
 import flet as ft
 import tkinter as tk
 from tkinter import filedialog
+from api.src.utils.functions.heartbeat import update_heartbeat
 
 def create_app(file_path):
     if not file_path:
@@ -12,6 +13,7 @@ def create_app(file_path):
     DataFrameUtils.execute_data_frame(file_path)
 
 def main(page: ft.Page):
+    update_heartbeat()
     page.title = "Avulsos RJ E CE"
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
     page.horizontal_alignment = ft.CrossAxisAlignment.CENTER
