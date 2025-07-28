@@ -4,6 +4,7 @@ import pyautogui as pya
 import keyboard as key
 from api.src.utils.functions.format_date import format_date, format_hora
 from api.src.utils.functions.capture_img import ScreenImage
+from api.src.utils.functions.heartbeat import update_heartbeat
 from api.src.utils.functions.click_position import click_and_fill, click_and_fill_novo
 from api.src.utils.logs.index import log
 from api.src.scripts.base.base_scripts import BaseTask
@@ -29,6 +30,7 @@ class CitacaoProcess(AllSeach):
             ScreenImage.wait_and_click('adv_agenda', "Tela de Agenda",)            
             pya.click(1016, 512, button='right')
             ScreenImage.wait_and_click('novo', "botao novo da agenda",)
+            update_heartbeat()
             ScreenImage.wait_and_click('prazo', "botao prazo da agenda",)
             date_citacao = format_date(self.row['DATA CITACAO'])
             hora_citacao = self.row['HORA CITACAO']
