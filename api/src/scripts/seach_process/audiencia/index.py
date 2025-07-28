@@ -5,6 +5,7 @@ import keyboard as key
 from api.src.utils.functions.format_date import format_date, format_hora
 from api.src.utils.functions.capture_img import ScreenImage
 from api.src.utils.functions.click_position import click_and_fill_novo
+from api.src.utils.functions.heartbeat import update_heartbeat
 from api.src.utils.logs.index import log
 from api.src.scripts.base.base_scripts import BaseTask
 
@@ -35,6 +36,7 @@ class AudienciaProcess(AllSeach):
             log.info(f'DATA AUDIENCIA:{date_audiencia} HORA AUDIENCIA:{hora_audiencia}')
             pyp.copy(date_audiencia)
             ScreenImage.wait_and_click('nova_nota', 'Nova Nota')
+            update_heartbeat()
             click_and_fill_novo('data_nota')
             pya.hotkey('ctrl', 'a')
             sleep(2)
