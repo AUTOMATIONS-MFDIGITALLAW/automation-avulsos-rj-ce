@@ -6,7 +6,7 @@ import os
 from api.src.utils.functions.sendmail import sendmail # Usa sua função já pronta
 from api.src.utils.logs.index import log
 
-HEARTBEAT_FILE = "C:/Users/NAME_DIRETORY/Documents/quality_rj_ce/api/src/utils/functions/heartbeat.txt"
+HEARTBEAT_FILE = "C:/Users/NAME_DIRETORY/Documents/automation-avulsos-rj-ce/api/src/utils/functions/heartbeat.txt"
 INTERVALO = 10 # minutos #esse tempo e pra test
 INTERVALO_LOOP = 240 #esse tempo e pra test
 MAX_ALERTAS_CONSECUTIVOS = 2
@@ -33,7 +33,7 @@ if __name__ == "__main__":
     alertas_consecutivos = 0
     log.info("🟡 Iniciando monitoramento do heartbeat...")
     
-    automacao_proc = subprocess.Popen(["python", "main.py"])
+    automacao_proc = subprocess.Popen(["python", "app.py"])
 
     try:
         while True:
