@@ -10,7 +10,6 @@ from api.src.scripts.seach_process.sentenca.index import SentencaProcess
 from api.src.scripts.seach_process.tutela.index import TutelaProcess
 from api.src.utils.functions.format_date import format_date, format_hora
 from api.src.utils.functions.capture_img import ScreenImage
-from api.src.utils.functions.heartbeat import update_heartbeat
 from api.src.utils.functions.click_position import click_and_fill, click_and_fill_novo
 from api.src.utils.logs.index import log
 from api.src.scripts.base.base_scripts import BaseTask
@@ -33,8 +32,8 @@ class SeachProcess(AllSeach):
 
         try:
             # Busca e clica na imagem "lupa_seach"
+            ScreenImage.wait_and_click('inicio_processo', 'Iniciando processo')
             ScreenImage.wait_and_click('lupa_seach', "botão de pesquisa")
-            update_heartbeat()
             
             busc_encont = ScreenImage.wait_and_click('busc', "Tela de busca",)
             
@@ -46,7 +45,9 @@ class SeachProcess(AllSeach):
             click_and_fill_novo('seach', '_POR NUMERO DE PROCESSO')
             click_and_fill('seach')
             ScreenImage.wait_and_Doubleclick('input_inserir', "Input Pesquisa",)
+            sleep(2)
             key.write(str(self.row['PROCESSO']))
+            sleep(4)
             ScreenImage.wait_and_click('button_ok', "Butão OK",)
             ScreenImage.wait_and_click('one', "ONE",)
             ScreenImage.wait_and_Doubleclick('process', "Processo",)
@@ -118,23 +119,23 @@ class SeachProcess(AllSeach):
             
             try:
                 
-                date_distribuicao = format_date(self.row['DATA DISTRIBUICAO'])
-                if date_distribuicao and not pd.isna(date_distribuicao) and str(date_distribuicao).strip().lower() != 'nat':
-                    log.info(f'DATA DISTRIBUIÇÃO:{date_distribuicao}')
-                    nota_distribuicao = ScreenImage.find_img('distribuicao', 'Distribuição', "")
-                    if nota_distribuicao:
-                        log.info('Nota de Distribuição existente, iniciando exclusão')
-                        ScreenImage.wait_and_click('distribuicao', 'Distribuição')
-                        pya.click(button='right')
-                        ScreenImage.wait_and_click('excluir', "Excluir",)
-                        ScreenImage.wait_and_click('yes_excluir', "yes",)
-                        DistribuicaoProcess.insert_distribuicao(self)
-                    else:
-                        log.info('Nota de Distribuição não existente')
-                        DistribuicaoProcess.insert_distribuicao(self)
+                # date_distribuicao = format_date(self.row['DATA DISTRIBUICAO'])
+                # if date_distribuicao and not pd.isna(date_distribuicao) and str(date_distribuicao).strip().lower() != 'nat':
+                #     log.info(f'DATA DISTRIBUIÇÃO:{date_distribuicao}')
+                #     nota_distribuicao = ScreenImage.find_img('distribuicao', 'Distribuição', "")
+                #     if nota_distribuicao:
+                #         log.info('Nota de Distribuição existente, iniciando exclusão')
+                #         ScreenImage.wait_and_click('distribuicao', 'Distribuição')
+                #         pya.click(button='right')
+                #         ScreenImage.wait_and_click('excluir', "Excluir",)
+                #         ScreenImage.wait_and_click('yes_excluir', "yes",)
+                #         DistribuicaoProcess.insert_distribuicao(self)
+                #     else:
+                #         log.info('Nota de Distribuição não existente')
+                #         DistribuicaoProcess.insert_distribuicao(self)
                         
                         
-                date_citacao = format_date(self.row['DATA CITACAO'])
+                date_citacao = format_date(self.row['DATA CITAÇÃO'])
                 if date_citacao and not pd.isna(date_citacao) and str(date_citacao).strip().lower() != 'nat':
                     log.info(f'DATA CITAÇÃO:{date_citacao}')
                     nota_citacao = ScreenImage.find_img('citacao', 'Citação', "")
@@ -152,12 +153,20 @@ class SeachProcess(AllSeach):
                         
                     sleep(20)                            
                     
-                date_tutela = format_date(self.row['DATA TUTELA'])
-                if date_tutela and not pd.isna(date_tutela) and str(date_tutela).strip().lower() != 'nat':
-                    log.info(f'DATA tutela:{date_tutela}')
-                    TutelaProcess.insert_tutela(self)                 
+                valor_diligencia = str(self.row.get('DILIGÊNCIA', '')).strip().upper()
+                date_tutela = format_date(self.row['DILIGÊNCIA'])
+
+                if 'TUTELA' in valor_diligencia:
+                    log.info(f'DILIGÊNCIA com TUTELA encontrada: {valor_diligencia}')
+                    TutelaProcess.insert_tutela(self)  
+                if 'CITAÇÃO LIMINAR' in valor_diligencia:
+                    log.info(f'DILIGÊNCIA com CITAÇÃO LIMINAR encontrada: {valor_diligencia}')
+                    TutelaProcess.insert_tutela(self)  
+                elif date_tutela and not pd.isna(date_tutela) and str(date_tutela).strip().lower() != 'nat':
+                    log.info(f'DATA tutela: {date_tutela}')
+                    TutelaProcess.insert_tutela(self)               
                     
-                audiencia = format_date(self.row['DATA AUDIENCIA'])                
+                audiencia = format_date(self.row['DATA AUDIÊNCIA'])                
                 if audiencia and not pd.isna(audiencia) and str(audiencia).strip().lower() != 'nat':
                     log.info('Audiencia existente iniciando abertura')
                     AudienciaProcess.insert_audiencia(self)  

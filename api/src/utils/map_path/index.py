@@ -14,6 +14,7 @@ POSITION_PATH = {
 IMAGE_PATH = {
     
     # busca de processo
+    'inicio_processo': 'api/src/utils/screens/img/inicio_processo.png',
     'lupa_seach': 'api/src/utils/screens/img/busc_lup.png',
     'busc': 'api/src/utils/screens/img/busca.png',
     'input_inserir': 'api/src/utils/screens/img/input_inserir.png',
