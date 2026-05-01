@@ -3,8 +3,6 @@ import pandas as pd
 import os
 from api.src.scripts.seach_process.process_scripts import SeachProcess
 from api.src.utils.logs.index import log
-from api.src.utils.functions import sendmail
-from api.src.utils.functions.sendmail import sendmail
 
 
 class DataFrameUtils:
@@ -39,33 +37,31 @@ class DataFrameUtils:
                 return
             
             log.info("✅ Todas as colunas obrigatórias estão presentes!")
-            sendmail()
+            
             
             # Garantindo que a coluna "Status" exista no DataFrame
             if "Status" not in df.columns:
                 df["Status"] = ""
+
+            # Corrige o erro do pandas: coluna estava como float64
+            df["Status"] = df["Status"].astype("object")
             
             # Iterando sobre cada linha do DataFrame
             for index, row in df.iterrows():
-                if row["Status"] == 'Concluído':
+                if row["Status"] == "Concluído":
                     log.success(f"⏭️ Linha {index + 1} já concluída. Pulando...")
-                    continue  # Pula para a próxima linha sem processar
-                
-                
+                    continue
+
                 log.info(f"📌 Processando linha {index + 1}: {row.to_dict()}")
 
-                process = SeachProcess(row)  # Criando a instância corretamente
-                process.process()  # Chamando a função process()
+                process = SeachProcess(row)
+                process.process()
                 sleep(15)
-                
-                 # Atualiza a coluna "Status" da linha correspondente
-                df.at[index, "Status"] = "Concluído"
 
-                # Salva no arquivo a cada iteração para garantir que os dados sejam preservados
+                df.at[index, "Status"] = "Concluído"
                 df.to_excel(file_path, index=False)
+
                 log.success(f"✅ Linha {index + 1} processada e marcada como 'Concluído'.")
-                
-            log.sucesso("Automaçao Conluida com sucesso!")
 
         except FileNotFoundError as e:
             log.error(f"Erro: {e}")

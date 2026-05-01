@@ -135,9 +135,9 @@ class SeachProcess(AllSeach):
                 #         DistribuicaoProcess.insert_distribuicao(self)
                         
                         
-                date_citacao = format_date(self.row['DATA CITAÇÃO'])
+                date_citacao = format_date(self.row['DATA CITACAO'])
                 if date_citacao and not pd.isna(date_citacao) and str(date_citacao).strip().lower() != 'nat':
-                    log.info(f'DATA CITAÇÃO:{date_citacao}')
+                    log.info(f'DATA CITACAO:{date_citacao}')
                     nota_citacao = ScreenImage.find_img('citacao', 'Citação', "")
                     if nota_citacao:
                         log.info('Nota de Citação existente, iniciando exclusão')
@@ -166,7 +166,7 @@ class SeachProcess(AllSeach):
                     log.info(f'DATA tutela: {date_tutela}')
                     TutelaProcess.insert_tutela(self)               
                     
-                audiencia = format_date(self.row['DATA AUDIÊNCIA'])                
+                audiencia = format_date(self.row['DATA AUDIENCIA'])                
                 if audiencia and not pd.isna(audiencia) and str(audiencia).strip().lower() != 'nat':
                     log.info('Audiencia existente iniciando abertura')
                     AudienciaProcess.insert_audiencia(self)  
@@ -181,10 +181,10 @@ class SeachProcess(AllSeach):
             ScreenImage.wait_and_click('encerrar', "Encerrar",)
             sleep(5)
             
-            ultimo_proc = ScreenImage.wait_and_click('ultimo_processo')
-            if not ultimo_proc:
-                ScreenImage.wait_and_click('encerrar', "Encerrar",)
-            ScreenImage.wait_and_click('ultimo_processo',)
+            # ultimo_proc = ScreenImage.wait_and_click('ultimo_processo')
+            # if not ultimo_proc:
+            #     ScreenImage.wait_and_click('encerrar', "Encerrar",)
+            # ScreenImage.wait_and_click('ultimo_processo', 'ulitimo item ok')
            
  
         except Exception as e:
